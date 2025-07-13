@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FTL>
+    <mod:findName type="event" name="STORAGE_CHECK_BUTTON">
+        <mod-append:choice req="weapons" lvl="1" hidden="true" blue="false">
+            <text id="_mw_text_choice_modify_weapon" />
+            <event load="_MW_EVENT_MODIFY_WEAPON" />
+        </mod-append:choice>
+    </mod:findName>
+
+    <event name="_MW_EVENT_MODIFY_WEAPON">
+        <text id="_mw_text_event_modify_weapon" />
+        <choice>
+            <text id="_mw_text_nevermind" />
+            <event load="STORAGE_CHECK" />
+        </choice>
+    </event>
+
+    <event name="_MW_LOADEVENT_MODIFY_WEAPON">
+        <loadEvent>_MW_EVENT_MODIFY_WEAPON</loadEvent>
+    </event>
+
+    <event name="_MW_EVENT_TEMPLATE_MODIFY_WEAPON_SLOT">
+        <text id="_mw_text_event_modify_weapon_slot" />
+        <choice>
+            <text id="_mw_text_nevermind" />
+            <event load="_MW_LOADEVENT_MODIFY_WEAPON" />
+        </choice>
+    </event>
+
+    <event name="_MW_EVENT_TEMPLATE_MODULE_ATTACH">
+        <text id="_mw_text_event_module_attach" />
+        <item_modify>
+            <item type="scrap" min="-30" max="-30" />
+            <item type="fuel" min="-3" max="-3" />
+            <item type="missiles" min="-3" max="-3" />
+            <item type="drones" min="-3" max="-3" />
+        </item_modify>
+        <remove name="MODULE_" />
+        <choice>
+            <text id="_mw_text_continue" />
+            <event load="_MW_LOADEVENT_MODIFY_WEAPON" />
+        </choice>
+    </event>
+    <event name="_MW_EVENT_TEMPLATE_MODULE_REMOVE">
+        <text id="_mw_text_event_module_remove" />
+        <!-- <weapon name="MODULE_" /> -->
+        <choice>
+            <text id="_mw_text_continue" />
+            <event load="_MW_LOADEVENT_MODIFY_WEAPON" />
+        </choice>
+    </event>
+</FTL>

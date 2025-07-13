@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FTL>
+
+<event name="_MW_EVENT_OPTION_INVALID">
+	<text id="_mw_text_wrong"/>
+	<item_modify>
+		<item type="drones" min="-99999" max="-99999"/>
+	</item_modify>
+</event>
+
+</FTL>
