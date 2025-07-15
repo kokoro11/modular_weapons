@@ -6,32 +6,42 @@
 
 <text name=""></text>
 <text name="" language="zh-Hans"></text>
+<text name="" language="ru"></text>
 -->
 
 <text name="_mw_text_wrong">You should never see this</text>
 <text name="_mw_text_wrong" language="zh-Hans">你应该不会看到这个</text>
+<text name="_mw_text_wrong" language="ru">Вы никогда не должны это видеть</text>
 
 <text name="_mw_text_nevermind">Nevermind.</text>
 <text name="_mw_text_nevermind" language="zh-Hans">返回</text>
+<text name="_mw_text_nevermind" language="ru">Неважно.</text>
 
 <text name="_mw_text_continue">Continue...</text>
 <text name="_mw_text_continue" language="zh-Hans">继续</text>
+<text name="_mw_text_continue" language="ru">Продолжить...</text>
 
 <text name="_mw_text_choice_modify_weapon">Modify a generic weapon.</text>
 <text name="_mw_text_choice_modify_weapon" language="zh-Hans">定制普通武器。</text>
+<text name="_mw_text_choice_modify_weapon" language="ru">Модифицировать обычное оружие.</text>
 
 <text name="_mw_text_event_modify_weapon">Which weapon would you like to modify?
 [WARNING: Due to technical issues, installed modules cannot be saved to the save file]</text>
 <text name="_mw_text_event_modify_weapon" language="zh-Hans">你想配置哪件武器？
 [警告：由于技术性问题，武器已安装的模块无法被存档]</text>
+<text name="_mw_text_event_modify_weapon" language="ru">Какое орудие вы хотите модифицировать?
+[ВНИМАНИЕ: из-за технических проблем, установленные модули невозможно сохранить в файле сохранения. Снимите модуль перед выходом из игры, если хотите, чтобы он у вас остался]</text>
 
 <text name="_mw_text_event_modify_weapon_slot">What would you like to do?</text>
 <text name="_mw_text_event_modify_weapon_slot" language="zh-Hans">你想做什么？</text>
+<text name="_mw_text_event_modify_weapon_slot" language="ru">Что бы вы хотели сделать?</text>
 
 <text name="_mw_text_event_module_attach">You install the module.</text>
 <text name="_mw_text_event_module_attach" language="zh-Hans">你安装了模块</text>
+<text name="_mw_text_event_module_attach" language="ru">Вы устанавливаете модуль.</text>
 
 <text name="_mw_text_event_module_remove">You detach the module.</text>
 <text name="_mw_text_event_module_remove" language="zh-Hans">你移除了模块</text>
+<text name="_mw_text_event_module_remove" language="ru">Вы отсоединяете модуль.</text>
 
 </FTL>
