@@ -363,7 +363,7 @@ script.on_internal_event(Defines.InternalEvents.WEAPON_RENDERBOX, function(weapo
     else
         return Defines.Chain.CONTINUE, l1, text, l3
     end
-end)
+end, -99999)
 
 script.on_internal_event(Defines.InternalEvents.PROJECTILE_FIRE, function(proj, weapon)
     local weaponTable = weapon.table.modularWeapons
@@ -380,32 +380,36 @@ script.on_internal_event(Defines.InternalEvents.PROJECTILE_FIRE, function(proj, 
     else
         weaponTable.shots = shots
     end
-end)
+end, -99999)
 
 script.on_internal_event(Defines.InternalEvents.SHIP_LOOP, function(shipMgr)
     local weaponSys = shipMgr.weaponSystem
     if not weaponSys or weaponSys.iHackEffect >= 2 then
         return
     end
+    local otherShip = Hyperspace.ships(1 - shipMgr.iShipId)
+    local canSlowdownWeapon = not (otherShip and otherShip.ship.bCloaked or shipMgr.bJumping)
     local weapons = weaponSys.weapons
     local size = weapons:size()
     for i = 0, size - 1 do
         local weapon = weapons[i]
         local weaponTable = weapon.table.modularWeapons
         if weapon.powered then
-            local installed = weaponTable.installed
-            if installed.power then
-                slowdownWeapon(weapon, 0.2)
-            end
-            if installed.adapt then
-                slowdownWeapon(weapon, 0.2)
+            if canSlowdownWeapon then
+                local installed = weaponTable.installed
+                if installed.power then
+                    slowdownWeapon(weapon, 0.2)
+                end
+                if installed.adapt then
+                    slowdownWeapon(weapon, 0.2)
+                end
             end
         else
             weaponTable.shots = 0
             weaponTable.volleys = 0
         end
     end
-end)
+end, -99999)
 
 ---@param shipMgr Hyperspace.ShipManager
 local function resetWeapons(shipMgr)
@@ -423,8 +427,8 @@ local function resetWeapons(shipMgr)
     end
 end
 
-script.on_internal_event(Defines.InternalEvents.JUMP_ARRIVE, resetWeapons)
-script.on_internal_event(Defines.InternalEvents.ON_WAIT, resetWeapons)
+script.on_internal_event(Defines.InternalEvents.JUMP_ARRIVE, resetWeapons, -99999)
+script.on_internal_event(Defines.InternalEvents.ON_WAIT, resetWeapons, -99999)
 
 script.on_internal_event(Defines.InternalEvents.WEAPON_COOLDOWN_MOD, function(weapon, mod)
     local weaponTable = weapon.table.modularWeapons
@@ -439,10 +443,10 @@ script.on_internal_event(Defines.InternalEvents.WEAPON_COOLDOWN_MOD, function(we
         mod = mod * 0.8
     end
     if installed.chain then
-        mod = mod * (1 - 0.1 * weaponTable.volleys)
+        mod = mod * (1 - 0.15 * weaponTable.volleys)
     end
     return Defines.Chain.CONTINUE, mod
-end)
+end, -99999)
 
 script.on_internal_event(Defines.InternalEvents.DAMAGE_BEAM, function(shipMgr, _, location, damage, _, beamHit)
     if damage.bLockdown and beamHit == Defines.BeamHit.NEW_ROOM then
@@ -451,4 +455,4 @@ script.on_internal_event(Defines.InternalEvents.DAMAGE_BEAM, function(shipMgr, _
         ship:LockdownRoom(room, location)
     end
     return Defines.Chain.CONTINUE, beamHit
-end)
+end, -99999)

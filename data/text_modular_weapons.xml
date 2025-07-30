@@ -14,11 +14,11 @@
 <text name="_mw_text_wrong" language="ru">Вы никогда не должны это видеть</text>
 
 <text name="_mw_text_nevermind">Nevermind.</text>
-<text name="_mw_text_nevermind" language="zh-Hans">返回</text>
+<text name="_mw_text_nevermind" language="zh-Hans">返回。</text>
 <text name="_mw_text_nevermind" language="ru">Неважно.</text>
 
 <text name="_mw_text_continue">Continue...</text>
-<text name="_mw_text_continue" language="zh-Hans">继续</text>
+<text name="_mw_text_continue" language="zh-Hans">继续。</text>
 <text name="_mw_text_continue" language="ru">Продолжить...</text>
 
 <text name="_mw_text_choice_modify_weapon">Modify a generic weapon.</text>
@@ -37,11 +37,19 @@
 <text name="_mw_text_event_modify_weapon_slot" language="ru">Что бы вы хотели сделать?</text>
 
 <text name="_mw_text_event_module_attach">You install the module.</text>
-<text name="_mw_text_event_module_attach" language="zh-Hans">你安装了模块</text>
+<text name="_mw_text_event_module_attach" language="zh-Hans">你安装了模块。</text>
 <text name="_mw_text_event_module_attach" language="ru">Вы устанавливаете модуль.</text>
 
 <text name="_mw_text_event_module_remove">You detach the module.</text>
-<text name="_mw_text_event_module_remove" language="zh-Hans">你移除了模块</text>
+<text name="_mw_text_event_module_remove" language="zh-Hans">你移除了模块。</text>
 <text name="_mw_text_event_module_remove" language="ru">Вы отсоединяете модуль.</text>
+
+<text name="_mw_text_choice_get_random_module">Get a random weapon module.</text>
+<text name="_mw_text_choice_get_random_module" language="zh-Hans">获取一个随机的武器模块。</text>
+<text name="_mw_text_choice_get_random_module" language="ru">Получите случайный модуль оружия.</text><!-- Machine Translated -->
+
+<text name="_mw_text_event_get_random_module">Confident with your new weapon module, you prepare to continue on your mission.</text>
+<text name="_mw_text_event_get_random_module" language="zh-Hans">带着新的武器模块，你准备出发开始任务。</text>
+<text name="_mw_text_event_get_random_module" language="ru">Уверенно владея новым оружейным модулем, вы готовитесь продолжить миссию.</text><!-- Machine Translated -->
 
 </FTL>

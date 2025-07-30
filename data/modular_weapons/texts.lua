@@ -205,9 +205,9 @@ texts.modules.chain.full = Text {
 	['ru'] = "Цепной модуль",
 }
 texts.modules.chain.effects = Text {
-    [''] = "-10%% charge time after each volley, up to 3 times",
-    ['zh-Hans'] = '每发后-10%%秒充能时间，最多3次',
-	['ru'] = "-10%% время перезарядки после каждого залпа, до 3 раз",
+    [''] = "-15%% charge time after each volley, up to 3 times",
+    ['zh-Hans'] = '每发后-15%%秒充能时间，最多3次',
+	['ru'] = "-15%% время перезарядки после каждого залпа, до 3 раз",
 }
 
 texts.none = Text {
