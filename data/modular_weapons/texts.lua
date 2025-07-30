@@ -156,7 +156,7 @@ texts.modules.power.full = Text {
 texts.modules.power.effects = Text {
     [''] = "+1 power cost, -20%% charge speed, +1 all damage (if it has any)",
     ['zh-Hans'] = '+1格能耗，-20%%秒充能速度，+1所有伤害（如果有的话）',
-	['ru'] = "+1 к потреблению энергии, +20%% к скорости перезарядки, +1 ко всему урону (если он есть)",
+	['ru'] = "+1 к потреблению энергии, -20%% к скорости перезарядки, +1 ко всему урону (если он есть)",
 }
 
 texts.modules.charge = TextCollection()
