@@ -46,10 +46,10 @@
 
 <text name="_mw_text_choice_get_random_module">Get a random weapon module.</text>
 <text name="_mw_text_choice_get_random_module" language="zh-Hans">获取一个随机的武器模块。</text>
-<text name="_mw_text_choice_get_random_module" language="ru">Получите случайный модуль оружия.</text><!-- Machine Translated -->
+<text name="_mw_text_choice_get_random_module" language="ru">Взять случайный оружейный модуль.</text>
 
 <text name="_mw_text_event_get_random_module">Confident with your new weapon module, you prepare to continue on your mission.</text>
 <text name="_mw_text_event_get_random_module" language="zh-Hans">带着新的武器模块，你准备出发开始任务。</text>
-<text name="_mw_text_event_get_random_module" language="ru">Уверенно владея новым оружейным модулем, вы готовитесь продолжить миссию.</text><!-- Machine Translated -->
+<text name="_mw_text_event_get_random_module" language="ru">Уверенные в своем новом оружейном модуле, вы готовитесь приступить к своей миссии.</text>
 
 </FTL>
