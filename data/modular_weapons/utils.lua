@@ -2,8 +2,12 @@ mods.modularWeapons = {}
 
 local Settings = Hyperspace.Settings
 local TextMeta = {
-    __index = function(texts)
-        return texts['']
+    __index = function(texts, language)
+        if language == '' then
+            return select(2, next(texts)) or ''
+        else
+            return texts['']
+        end
     end,
     __call = function(texts, ...)
         local success, result = pcall(string.format, texts[Settings.language], ...)
@@ -13,6 +17,9 @@ local TextMeta = {
             log("ERROR: " .. result)
             return texts[Settings.language]
         end
+    end,
+    __tostring = function(texts)
+        return texts[Settings.language]
     end
 }
 
@@ -33,9 +40,16 @@ local ErrorMeta = {
     end
 }
 
-function mods.modularWeapons.TextCollection()
+function mods.modularWeapons.TextCollection(default)
     local collection = {}
-    setmetatable(collection, ErrorMeta)
+    if not default then
+        setmetatable(collection, ErrorMeta)
+    else
+        local meta = {
+            __index = function() return default end
+        }
+        setmetatable(collection, meta)
+    end
     return collection
 end
 
@@ -96,24 +110,44 @@ end
 ---@param damage Hyperspace.Damage
 ---@param n integer
 function mods.modularWeapons.addDamage(damage, n)
-    local hullDamage = damage.iDamage
-    local sysDamage = damage.iDamage + damage.iSystemDamage
     local ionDamage = damage.iIonDamage
-    local persDamage = damage.iPersDamage
-    if hullDamage > 0 then
-        hullDamage = hullDamage + n
-    end
-    if sysDamage > 0 then
-        sysDamage = sysDamage + n
-    end
     if ionDamage > 0 then
-        ionDamage = ionDamage + n
+        damage.iIonDamage = ionDamage + n
     end
-    if persDamage > 0 then
-        persDamage = persDamage + n
+    local iDamage = damage.iDamage
+    local iSystemDamage = damage.iSystemDamage
+    local iPersDamage = damage.iPersDamage
+    if iDamage > 0 then
+        damage.iDamage = iDamage + n
+        if iSystemDamage + iDamage <= 0 then
+            damage.iSystemDamage = iSystemDamage - n
+        end
+        if iPersDamage + iDamage <= 0 then
+            damage.iPersDamage = iPersDamage - n
+        end
+    else
+        if iSystemDamage + iDamage > 0 then
+            damage.iSystemDamage = iSystemDamage + n
+        end
+        if iPersDamage + iDamage > 0 then
+            damage.iPersDamage = iPersDamage + n
+        end
     end
-    damage.iDamage = hullDamage
-    damage.iSystemDamage = sysDamage - hullDamage
-    damage.iIonDamage = ionDamage
-    damage.iPersDamage = persDamage
+end
+
+local crewFactoryMembers = Hyperspace.CrewFactory.crewMembers
+---@return Hyperspace.CrewMember[]
+function mods.modularWeapons.getPlayerCrewList()
+    local retList = {}
+    local listEnd = 1
+    for i = 0, crewFactoryMembers:size() - 1 do
+        local crew = crewFactoryMembers[i]
+        -- Hyperspace.CrewStat.NO_SLOT == 45
+        --if crew.iShipId == 0 and crew:CountForVictory() and not select(2, crew.extend:CalculateStat(45)) then
+        if crew.iShipId == 0 and crew:CountForVictory() then
+            retList[listEnd] = crew
+            listEnd = listEnd + 1
+        end
+    end
+    return retList
 end

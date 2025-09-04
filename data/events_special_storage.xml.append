@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FTL>
+    <mod:findName type="event" name="STORAGE_CHECK_REAL">
+        <mod-append:choice req="GIFTLIST_MODULES_and_not_mw_pv_can_modify_crew" lvl="1" hidden="true" blue="true">
+            <text id="_mw_text_choice_reverse_engineer_modules" />
+            <event load="_MW_EVENT_REVERSE_ENGINEER_MODULES" />
+        </mod-append:choice>
+        <mod-append:choice req="LIST_CREW_HEKTAR_and_not_mw_pv_can_modify_crew" lvl="1" hidden="true" blue="true">
+            <text id="_mw_text_choice_hektar_reverse_engineer_modules" />
+            <event load="_MW_EVENT_HEKTAR_REVERSE_ENGINEER_MODULES" />
+        </mod-append:choice>
+    </mod:findName>
+
+    <event name="_MW_EVENT_REVERSE_ENGINEER_MODULES">
+        <text id="_mw_text_event_reverse_engineer_modules" />
+        <modifyPursuit amount="2" />
+        <variable name="_mw_pv_can_modify_crew" op="set" val="1" />
+        <choice>
+            <text id="_mw_text_continue" />
+            <event load="_MW_EVENT_NULL" />
+        </choice>
+    </event>
+
+    <event name="_MW_EVENT_HEKTAR_REVERSE_ENGINEER_MODULES">
+        <text id="_mw_text_event_reverse_engineer_modules" />
+        <variable name="_mw_pv_can_modify_crew" op="set" val="1" />
+        <choice>
+            <text id="_mw_text_continue" />
+            <event load="_MW_EVENT_NULL" />
+        </choice>
+    </event>
+
     <mod:findName type="event" name="STORAGE_CHECK_BUTTON">
         <mod-append:choice req="weapons" lvl="1" hidden="true" blue="false">
             <text id="_mw_text_choice_modify_weapon" />
             <event load="_MW_EVENT_MODIFY_WEAPON" />
+        </mod-append:choice>
+        <mod-append:choice req="GIFTLIST_MODULES_and_not_mw_pv_can_modify_crew" lvl="1" hidden="true" blue="false">
+            <text id="_mw_text_choice_cannot_modify_crew" />
+            <event load="_MW_EVENT_OPTION_INVALID" />
+        </mod-append:choice>
+        <mod-append:choice req="LIST_CREW_HEKTAR_and_not_mw_pv_can_modify_crew" lvl="1" hidden="true" blue="true">
+            <text id="_mw_text_choice_hektar_reverse_engineer_modules" />
+            <event load="_MW_EVENT_HEKTAR_REVERSE_ENGINEER_MODULES" />
+        </mod-append:choice>
+        <mod-append:choice req="_mw_pv_can_modify_crew" lvl="1" hidden="true" blue="false">
+            <text id="_mw_text_choice_modify_crew" />
+            <event load="_MW_EVENT_MODIFY_CREW" />
         </mod-append:choice>
     </mod:findName>
 
@@ -48,6 +90,49 @@
         <choice>
             <text id="_mw_text_continue" />
             <event load="_MW_LOADEVENT_MODIFY_WEAPON" />
+        </choice>
+    </event>
+
+    <event name="_MW_EVENT_MODIFY_CREW">
+        <text id="_mw_text_event_modify_crew" />
+        <choice>
+            <text id="_mw_text_nevermind" />
+            <event load="STORAGE_CHECK" />
+        </choice>
+    </event>
+
+    <event name="_MW_LOADEVENT_MODIFY_CREW">
+        <loadEvent>_MW_EVENT_MODIFY_CREW</loadEvent>
+    </event>
+
+    <event name="_MW_EVENT_TEMPLATE_MODIFY_CREW_SELFID">
+        <text id="_mw_text_event_modify_crew_selfid" />
+        <choice>
+            <text id="_mw_text_nevermind" />
+            <event load="_MW_LOADEVENT_MODIFY_CREW" />
+        </choice>
+    </event>
+
+    <event name="_MW_EVENT_TEMPLATE_CREW_MODULE_ATTACH">
+        <text id="_mw_text_event_crew_module_attach" />
+        <item_modify>
+            <item type="scrap" min="-10" max="-10" />
+            <item type="fuel" min="-1" max="-1" />
+            <item type="missiles" min="-1" max="-1" />
+            <item type="drones" min="-1" max="-1" />
+        </item_modify>
+        <remove name="MODULE_" />
+        <choice>
+            <text id="_mw_text_continue" />
+            <event load="_MW_LOADEVENT_MODIFY_CREW" />
+        </choice>
+    </event>
+    <event name="_MW_EVENT_TEMPLATE_CREW_MODULE_REMOVE">
+        <text id="_mw_text_event_crew_module_remove" />
+        <!-- <weapon name="MODULE_" /> -->
+        <choice>
+            <text id="_mw_text_continue" />
+            <event load="_MW_LOADEVENT_MODIFY_CREW" />
         </choice>
     </event>
 </FTL>

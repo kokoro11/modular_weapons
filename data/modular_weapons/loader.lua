@@ -1,0 +1,5 @@
+dofile("mods/modular_weapons_git/data/modular_weapons/utils.lua")
+dofile("mods/modular_weapons_git/data/modular_weapons/texts.lua")
+dofile("mods/modular_weapons_git/data/modular_weapons/core.lua")
+dofile("mods/modular_weapons_git/data/modular_weapons/powers.lua")
+dofile("mods/modular_weapons_git/data/modular_weapons/crew.lua")

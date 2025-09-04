@@ -1,13 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FTL>
+    <version>^1.19.0</version>
 
-<version>^1.19.0</version>
+    <events>
+        <req name="GIFTLIST_MODULES_and_not_mw_pv_can_modify_crew" type="all">
+            <name>GIFTLIST_MODULES</name>
+            <req lvl="0" max_lvl="0">
+                <name>_mw_pv_can_modify_crew</name>
+            </req>
+        </req>
+        <req name="LIST_CREW_HEKTAR_and_not_mw_pv_can_modify_crew" type="all">
+            <name>LIST_CREW_HEKTAR</name>
+            <req lvl="0" max_lvl="0">
+                <name>_mw_pv_can_modify_crew</name>
+            </req>
+        </req>
+    </events>
 
-<mod:findLike type="scripts" limit="1">
-    <mod-append:script>data/modular_weapons/utils.lua</mod-append:script>
-    <mod-append:script>data/modular_weapons/texts.lua</mod-append:script>
-    <mod-append:script>data/modular_weapons/core.lua</mod-append:script>
-</mod:findLike>
-
+    <mod:findLike type="scripts" limit="1">
+        <mod-append:script>data/modular_weapons/utils.lua</mod-append:script>
+        <mod-append:script>data/modular_weapons/texts.lua</mod-append:script>
+        <mod-append:script>data/modular_weapons/core.lua</mod-append:script>
+        <mod-append:script>data/modular_weapons/powers.lua</mod-append:script>
+        <mod-append:script>data/modular_weapons/crew.lua</mod-append:script>
+        <!-- <mod-append:script>data/modular_weapons/loader.lua</mod-append:script> -->
+    </mod:findLike>
+    <!-- <mod:findLike type="augments" limit="1">
+        <mod:findName type="aug" name="UPG_ARM_MAGNETIC">
+            <mod-append:statBoosts>
+                <statBoost name="powerEffect">
+                    <boostType>ADD</boostType>
+                    <shipTarget>ALL</shipTarget>
+                    <crewTarget>ALLIES</crewTarget>
+                    <droneTarget>CREW</droneTarget>
+                    <powerEffect>
+                        <cooldown>2</cooldown>
+                        <jumpCooldown>full</jumpCooldown>
+                        <powerSounds>
+                            <powerSound>catLaugh</powerSound>
+                        </powerSounds>
+                        <buttonText>ADAPT</buttonText>
+                        <tooltip>[COOLDOWN:12s CHARGES:5 AUTO-USE]
+                            Increases melee damage, sabotage damage, max health by 0.25x.
+                            Doubles door damage.
+                            Reduces ranged damage, move speed, repair speed, heal speed by 0.2x.</tooltip>
+                        <cooldownColor r="125" g="175" b="175" />
+                        <powerCharges>5</powerCharges>
+                        <initialCharges>5</initialCharges>
+                        <chargesPerJump>5</chargesPerJump>
+                        <statBoosts>
+                            <statBoost name="damageMultiplier">
+                                <boostType>MULT</boostType>
+                                <amount>1.25</amount>
+                                <shipTarget>ALL</shipTarget>
+                                <crewTarget>SELF</crewTarget>
+                                <droneTarget>ALL</droneTarget>
+                                <affectsSelf>true</affectsSelf>
+                                <jumpClear>true</jumpClear>
+                                <cloneClear>true</cloneClear>
+                            </statBoost>
+                            <statBoost name="rangedDamageMultiplier">
+                                <boostType>MULT</boostType>
+                                <amount>0.64</amount>
+                                <shipTarget>ALL</shipTarget>
+                                <crewTarget>SELF</crewTarget>
+                                <droneTarget>ALL</droneTarget>
+                                <affectsSelf>true</affectsSelf>
+                                <jumpClear>true</jumpClear>
+                                <cloneClear>true</cloneClear>
+                            </statBoost>
+                            <statBoost name="sabotageSpeedMultiplier">
+                                <boostType>MULT</boostType>
+                                <amount>1.25</amount>
+                                <shipTarget>ALL</shipTarget>
+                                <crewTarget>SELF</crewTarget>
+                                <droneTarget>ALL</droneTarget>
+                                <affectsSelf>true</affectsSelf>
+                                <jumpClear>true</jumpClear>
+                                <cloneClear>true</cloneClear>
+                            </statBoost>
+                            <statBoost name="maxHealth">
+                                <boostType>MULT</boostType>
+                                <amount>1.25</amount>
+                                <shipTarget>ALL</shipTarget>
+                                <crewTarget>SELF</crewTarget>
+                                <droneTarget>ALL</droneTarget>
+                                <affectsSelf>true</affectsSelf>
+                                <jumpClear>true</jumpClear>
+                                <cloneClear>true</cloneClear>
+                            </statBoost>
+                            <statBoost name="moveSpeedMultiplier">
+                                <boostType>MULT</boostType>
+                                <amount>0.8</amount>
+                                <shipTarget>ALL</shipTarget>
+                                <crewTarget>SELF</crewTarget>
+                                <droneTarget>ALL</droneTarget>
+                                <affectsSelf>true</affectsSelf>
+                                <jumpClear>true</jumpClear>
+                                <cloneClear>true</cloneClear>
+                            </statBoost>
+                            <statBoost name="doorDamageMultiplier">
+                                <boostType>MULT</boostType>
+                                <amount>2</amount>
+                                <shipTarget>ALL</shipTarget>
+                                <crewTarget>SELF</crewTarget>
+                                <droneTarget>ALL</droneTarget>
+                                <affectsSelf>true</affectsSelf>
+                                <jumpClear>true</jumpClear>
+                                <cloneClear>true</cloneClear>
+                            </statBoost>
+                            <statBoost name="repairSpeed">
+                                <boostType>MULT</boostType>
+                                <amount>0.8</amount>
+                                <shipTarget>ALL</shipTarget>
+                                <crewTarget>SELF</crewTarget>
+                                <droneTarget>ALL</droneTarget>
+                                <affectsSelf>true</affectsSelf>
+                                <jumpClear>true</jumpClear>
+                                <cloneClear>true</cloneClear>
+                            </statBoost>
+                            <statBoost name="healSpeed">
+                                <boostType>MULT</boostType>
+                                <amount>0.8</amount>
+                                <shipTarget>ALL</shipTarget>
+                                <crewTarget>SELF</crewTarget>
+                                <droneTarget>ALL</droneTarget>
+                                <affectsSelf>true</affectsSelf>
+                                <jumpClear>true</jumpClear>
+                                <cloneClear>true</cloneClear>
+                            </statBoost>
+                        </statBoosts>
+                    </powerEffect>
+                </statBoost>
+            </mod-append:statBoosts>
+        </mod:findName>
+    </mod:findLike> -->
+    <!-- <mod:findLike type="crew" limit="1">
+        <mod-append:race name="_mw_race_dummy">
+            <powerEffect name="_mw_power_effect_crystal">
+                <cooldown>38</cooldown>
+                <jumpCooldown>full</jumpCooldown>
+                <req>
+                    <minHealth>20</minHealth>
+                </req>
+                <req type="enemy">
+                    <maxHealth>115</maxHealth>
+                </req>
+                <powerSounds>
+                    <powerSound>lockdown1</powerSound>
+                    <powerSound>lockdown2</powerSound>
+                </powerSounds>
+                <lockdown>true</lockdown>
+                <buttonText>LOCKDOWN</buttonText>
+                <tooltip>[COOLDOWN:38s -7HP]
+                    Locks down the occupied room for 12 seconds, preventing crew from moving in.
+                </tooltip>
+                <cooldownColor r="125" g="175" b="175" />
+                <effectAnim>explosion_crystal</effectAnim>
+                <powerCharges>2</powerCharges>
+                <initialCharges>2</initialCharges>
+                <chargesPerJump>1</chargesPerJump>
+                <selfHealth>-7</selfHealth>
+            </powerEffect>
+            <powerEffect name="_mw_power_effect_bio">
+                <cooldown>32</cooldown>
+                <jumpCooldown>full</jumpCooldown>
+                <powerSounds>
+                    <powerSound>smallExplosion</powerSound>
+                </powerSounds>
+                <buttonText>BOMB</buttonText>
+                <tooltip>[COOLDOWN:32s DURATION:6s]
+                    Deploys a Bio bomb that harms ALL other crew in the room for 30 damage.
+                    Will temporarily cloak and cease movements and attacks for 6 seconds, hiding from enemy crew.</tooltip>
+                <cooldownColor r="38" g="130" b="152" />
+                <friendlyFire>true</friendlyFire>
+                <persDamage>2</persDamage>
+                <effectAnim>bio_bomb_detinate</effectAnim>
+                <animFrame>8</animFrame>
+                <temporaryEffect>
+                    <duration>6</duration>
+                    <cooldownColor r="198" g="198" b="198" />
+                    <finishSounds>
+                        <finishSound>decloak</finishSound>
+                    </finishSounds>
+                    <moveSpeedMultiplier>0</moveSpeedMultiplier>
+                    <validTarget>false</validTarget>
+                    <animSheet baseVisible="true">slug_clansman_cloak</animSheet>
+                    <canSabotage>false</canSabotage>
+                    <canRepair>false</canRepair>
+                    <canFight>false</canFight>
+                </temporaryEffect>
+            </powerEffect>
+        </mod-append:race>
+    </mod:findLike> -->
 </FTL>

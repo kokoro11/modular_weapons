@@ -9,4 +9,6 @@
 	</item_modify>
 </event>
 
+<event name="_MW_EVENT_NULL" />
+
 </FTL>

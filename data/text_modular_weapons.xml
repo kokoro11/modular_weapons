@@ -52,4 +52,89 @@
 <text name="_mw_text_event_get_random_module" language="zh-Hans">带着新的武器模块，你准备出发开始任务。</text>
 <text name="_mw_text_event_get_random_module" language="ru">Уверенно владея новым оружейным модулем, вы готовитесь продолжить миссию.</text><!-- Machine Translated -->
 
+<text name="_mw_text_choice_reverse_engineer_modules">(Hektar Modules) Take time to reverse engineer Hektar Tech.
+   [2 fleet boost]</text>
+
+<text name="_mw_text_choice_hektar_reverse_engineer_modules">(Hektar Crew) Reverse engineer Hektar Tech.</text>
+
+<text name="_mw_text_event_reverse_engineer_modules">After extensive research, you figured out how to incorporate Hektar technology into personal weaponry.
+
+You can now install Hektar Modules on your crew, though this still requires resources.</text>
+
+<text name="_mw_text_choice_cannot_modify_crew">Modular crew armory. [Not researched]</text>
+
+<text name="_mw_text_choice_modify_crew">Modular crew armory.</text>
+
+<text name="_mw_text_event_modify_crew">Which crew member would you like to configure modules for?</text>
+
+<text name="_mw_text_event_modify_crew_selfid">What would you like to do?</text>
+
+<text name="_mw_text_event_crew_module_attach">You install the module.</text>
+
+<text name="_mw_text_event_crew_module_remove">You detach the module.</text>
+
+<text name="_mw_power_effect_bio">BIO</text>
+
+<text name="_mw_power_effect_bio_tooltip">[COOLDOWN:45s DURATION:15s]
+Deploys a bomb that deals 30 damage to all enemy crew in the room and releases poisonous gas which makes nearby enemies take 50% increased damage from any source.
+Will also be immobile for the duration.</text>
+
+<text name="_mw_power_effect_cooldown">COOLDOWN</text>
+
+<text name="_mw_power_effect_cooldown_tooltip">[COOLDOWN:45s DURATION:15s]
+Increases movement speed, crew damage, repair speed, sabotage speed and heal speed to 1.5x.
+Also increases damage taken from hazards to 1.5x.</text>
+
+<text name="_mw_power_effect_lockdown">LOCKDOWN</text>
+
+<text name="_mw_power_effect_lockdown_tooltip">[COOLDOWN:60s]
+Locks down the occupied room, preventing crew from moving in.</text>
+
+<text name="_mw_power_effect_pierce">PIERCE</text>
+
+<text name="_mw_power_effect_pierce_tooltip">[COOLDOWN:45s DURATION:15s]
+Deploys a bomb that deals 1 system damage and opens a breach in the current room.
+Also increases sabotage speed to 1.5x.</text>
+
+<text name="_mw_power_effect_stun">STUN</text>
+
+<text name="_mw_power_effect_stun_tooltip">[COOLDOWN:45s DURATION:15s]
+Deploys a bomb that deals 1 ion damage and stuns all all enemy crew in the current room for 5s.
+Will also be immune to stun and resist mind control.</text>
+
+<text name="_mw_power_effect_accuracy">ACCURACY</text>
+
+<text name="_mw_power_effect_accuracy_tooltip">[COOLDOWN:45s DURATION:15s]
+Increases ranged damage and sabotage speed to 2x but reduces melee damage to 0.5x.</text>
+
+<text name="_mw_power_effect_fire">FIRE</text>
+
+<text name="_mw_power_effect_fire_tooltip">[COOLDOWN:45s DURATION:15s]
+Starts a fire in the current room and become immune to fire damage.
+Allied crew in the same room takes only 0.25x fire damage.</text>
+
+<text name="_mw_power_effect_hull">HULL</text>
+
+<text name="_mw_power_effect_hull_tooltip">[COOLDOWN:45s DURATION:15s]
+Takes 0.5x damage from any source and allied crew including self in the same room gain 1.5x Max Health.</text>
+
+<text name="_mw_power_effect_power">POWER</text>
+
+<text name="_mw_power_effect_power_tooltip">[COOLDOWN:30s DURATION:30s]
+Provides 2 bonus power to current system in the room and takes 0.7x damage from any source.</text>
+
+<text name="_mw_power_effect_adapt">ADAPT</text>
+
+<text name="_mw_power_effect_adapt_tooltip">[COOLDOWN:12s CHARGES:5 AUTO-USE]
+Increases melee damage, sabotage damage, max health by 0.25x.
+Doubles door damage.
+Reduces ranged damage, move speed, repair speed, heal speed by 0.2x.</text>
+
+<text name="_mw_power_effect_chain">CHAIN</text>
+
+<text name="_mw_power_effect_chain_tooltip">[COOLDOWN:12s CHARGES:5 AUTO-USE]
+Increases ranged damage, heal speed, repair speed by 0.25x.
+Doubles door damage and move speed.
+Reduces melee damage, sabotage damage, max health by 0.2x.</text>
+
 </FTL>

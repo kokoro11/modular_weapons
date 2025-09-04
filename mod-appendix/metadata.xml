@@ -3,7 +3,7 @@
 	<title><![CDATA[ Universal Weapon Modularity ]]></title>
 	<threadUrl><![CDATA[ https://github.com/kokoro11/modular_weapons ]]></threadUrl>
 	<author><![CDATA[ kokoro11 ]]></author>
-	<version><![CDATA[ 0.1 ]]></version>
+	<version><![CDATA[ 0.2 ]]></version>
 	<description>
 <![CDATA[
 Ever wished you could slap a Hullbust Module on your trusty Burst Laser II? Or give a Pike Beam the shield-piercing power it deserves? Now you can.
@@ -12,8 +12,11 @@ Universal Weapon Modularity(UWM) breaks the chains of Hektar's proprietary techn
 
 This mod fundamentally changes how you approach your ship's loadout, opening up a universe of new strategic possibilities. Turn any weapon into the perfect tool for the job.
 
-Latest Version: v0.1
+Latest Version: v0.2
 Download Link: https://github.com/kokoro11/modular_weapons/releases
+
+New feature in v0.2: Modular crew armory
+You can now install Hektar Modules on your crew.
 
 Cost to install a module on a non-modular weapon: 30 scrap, 3 fuel, 3 missiles, 3 drone parts.
 Note: The resources used for installation will not be refunded when you detach the module or sell the weapon. Choose your modifications wisely!

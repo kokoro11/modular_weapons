@@ -7,6 +7,11 @@
 -- 5 = BeamWeapon
 -- 6 = PDSFire
 
+local min = math.min
+local max = math.max
+local Global = Hyperspace.Global.GetInstance()
+local GetShipManager = Global.GetShipManager
+
 local addDamage = mods.modularWeapons.addDamage
 local totalShots = mods.modularWeapons.totalShots
 local slowdownWeapon = mods.modularWeapons.slowdownWeapon
@@ -88,12 +93,12 @@ function MODULES.stun.fire(proj)
 end
 
 function MODULES.adapt.attach(weapon)
-    Hyperspace.ships.player.weaponSystem:ForceDecreasePower(99)
+    GetShipManager(Global, 0).weaponSystem:ForceDecreasePower(99)
     weapon.requiredPower = weapon.requiredPower + 1
 end
 
 function MODULES.adapt.remove(weapon)
-    Hyperspace.ships.player.weaponSystem:ForceDecreasePower(99)
+    GetShipManager(Global, 0).weaponSystem:ForceDecreasePower(99)
     weapon.requiredPower = weapon.requiredPower - 1
 end
 
@@ -126,12 +131,12 @@ function MODULES.hull.fire(proj)
 end
 
 function MODULES.power.attach(weapon)
-    Hyperspace.ships.player.weaponSystem:ForceDecreasePower(99)
+    GetShipManager(Global, 0).weaponSystem:ForceDecreasePower(99)
     weapon.requiredPower = weapon.requiredPower + 1
 end
 
 function MODULES.power.remove(weapon)
-    Hyperspace.ships.player.weaponSystem:ForceDecreasePower(99)
+    GetShipManager(Global, 0).weaponSystem:ForceDecreasePower(99)
     weapon.requiredPower = weapon.requiredPower - 1
 end
 
@@ -142,7 +147,7 @@ end
 function MODULES.charge.attach(weapon)
     local weaponTable = weapon.table.modularWeapons
     weaponTable.origNumShots = weapon.numShots
-    weapon.numShots = math.min(weapon.numShots, 1)
+    weapon.numShots = min(weapon.numShots, 1)
     weaponTable.totalShots = totalShots(weapon)
 end
 
@@ -157,8 +162,8 @@ function MODULES.charge.compatible(weapon)
 end
 
 script.on_internal_event(Defines.InternalEvents_CONSTRUCT_PROJECTILE_FACTORY, function(weapon)
-    weapon.table.modularWeapons = {}
-    local weaponTable = weapon.table.modularWeapons
+    local weaponTable = {}
+    weapon.table.modularWeapons = weaponTable
     weaponTable.installed = {}
     weaponTable.status = false
     weaponTable.attribute = false
@@ -290,7 +295,7 @@ script.on_internal_event(Defines.InternalEvents.PRE_CREATE_CHOICEBOX, function(e
     if event.eventName ~= "_MW_EVENT_MODIFY_WEAPON" then
         return
     end
-    local playerShip = Hyperspace.ships.player
+    local playerShip = GetShipManager(Global, 0)
     local weaponSys = playerShip.weaponSystem
     if not weaponSys then
         return
@@ -333,7 +338,7 @@ script.on_internal_event(Defines.InternalEvents.POST_CREATE_CHOICEBOX, function(
     if not MODULES[moduleLower] then
         return
     end
-    local weapon = Hyperspace.ships.player.weaponSystem.weapons[slot]
+    local weapon = GetShipManager(Global, 0).weaponSystem.weapons[slot]
     if isAttach then
         attachModule(weapon, moduleLower)
     else
@@ -341,11 +346,12 @@ script.on_internal_event(Defines.InternalEvents.POST_CREATE_CHOICEBOX, function(
     end
 end)
 
-script.on_internal_event(Defines.InternalEvents.WEAPON_RENDERBOX, function(weapon, _, _, l1, l2, l3)
+script.on_internal_event(Defines.InternalEvents.WEAPON_RENDERBOX, function(weapon, _, _, _, l2, l3)
     local weaponTable = weapon.table.modularWeapons
     local installed = weaponTable.installed
     if next(installed) == nil then
-        return Defines.Chain.CONTINUE, l1, l2, l3
+        ---@diagnostic disable-next-line: missing-return-value
+        return
     end
     local text = ''
     if weaponTable.attribute then
@@ -354,14 +360,15 @@ script.on_internal_event(Defines.InternalEvents.WEAPON_RENDERBOX, function(weapo
     if weaponTable.status then
         text = text .. weaponTable.status
     end
-    local volleys = weaponTable.volleys
-    if volleys > 0 and (installed.chain or installed.adapt) then
-        text = text .. '+' .. volleys
+    if installed.chain or installed.adapt then
+        text = text .. '+' .. weaponTable.volleys
     end
     if #l2 > 0 then
-        return Defines.Chain.CONTINUE, l1, l2, l3 .. text
+        ---@diagnostic disable-next-line: return-type-mismatch
+        return 0, nil, nil, l3 .. text
     else
-        return Defines.Chain.CONTINUE, l1, text, l3
+        ---@diagnostic disable-next-line: missing-return-value, return-type-mismatch
+        return 0, nil, text
     end
 end, -99999)
 
@@ -376,7 +383,7 @@ script.on_internal_event(Defines.InternalEvents.PROJECTILE_FIRE, function(proj, 
     local shots = weaponTable.shots + 1
     if shots >= weaponTable.totalShots then
         weaponTable.shots = 0
-        weaponTable.volleys = math.min(weaponTable.volleys + 1, MAX_BOOST)
+        weaponTable.volleys = min(weaponTable.volleys + 1, MAX_BOOST)
     else
         weaponTable.shots = shots
     end
@@ -387,16 +394,15 @@ script.on_internal_event(Defines.InternalEvents.SHIP_LOOP, function(shipMgr)
     if not weaponSys or weaponSys.iHackEffect >= 2 then
         return
     end
-    local otherShip = Hyperspace.ships(1 - shipMgr.iShipId)
+    local otherShip = GetShipManager(Global, 1 - shipMgr.iShipId)
     local canSlowdownWeapon = not (otherShip and otherShip.ship.bCloaked or shipMgr.bJumping)
     local weapons = weaponSys.weapons
-    local size = weapons:size()
-    for i = 0, size - 1 do
+    for i = 0, weapons:size() - 1 do
         local weapon = weapons[i]
         local weaponTable = weapon.table.modularWeapons
         if weapon.powered then
-            if canSlowdownWeapon then
-                local installed = weaponTable.installed
+            local installed = weaponTable.installed
+            if next(installed) ~= nil and canSlowdownWeapon then
                 if installed.power then
                     slowdownWeapon(weapon, 0.2)
                 end
@@ -434,10 +440,11 @@ script.on_internal_event(Defines.InternalEvents.WEAPON_COOLDOWN_MOD, function(we
     local weaponTable = weapon.table.modularWeapons
     local installed = weaponTable.installed
     if next(installed) == nil then
-        return Defines.Chain.CONTINUE, mod
+        ---@diagnostic disable-next-line: missing-return-value
+        return
     end
     if installed.charge then
-        mod = mod * 0.5 / math.max(weaponTable.origNumShots, 1)
+        mod = mod * 0.5 / max(weaponTable.origNumShots, 1)
     end
     if installed.cooldown then
         mod = mod * 0.8
@@ -445,14 +452,14 @@ script.on_internal_event(Defines.InternalEvents.WEAPON_COOLDOWN_MOD, function(we
     if installed.chain then
         mod = mod * (1 - 0.15 * weaponTable.volleys)
     end
-    return Defines.Chain.CONTINUE, mod
+    return 0, mod
 end, -99999)
 
 script.on_internal_event(Defines.InternalEvents.DAMAGE_BEAM, function(shipMgr, _, location, damage, _, beamHit)
-    if damage.bLockdown and beamHit == Defines.BeamHit.NEW_ROOM then
+    -- Defines.BeamHit.NEW_ROOM == 2
+    if damage.bLockdown and beamHit == 2 then
         local ship = shipMgr.ship
-        local room = ship:GetSelectedRoomId(location.x, location.y, true)
-        ship:LockdownRoom(room, location)
+        ship:LockdownRoom(ship:GetSelectedRoomId(location.x, location.y, true), location)
+        ---@diagnostic disable-next-line: missing-return
     end
-    return Defines.Chain.CONTINUE, beamHit
 end, -99999)
